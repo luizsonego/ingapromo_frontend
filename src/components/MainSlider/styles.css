@@ -1,0 +1,10 @@
+.main .item {
+    margin: 0 15px;
+}
+
+.item {
+    width: 100%;
+    height: 200px;
+    background: #8C8;
+    margin: 0 10px;
+}
