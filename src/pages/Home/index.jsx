@@ -1,83 +1,71 @@
-import React from 'react';
-import AdsHorizontal from '../../components/Ads/horizontal';
-import AdsVertical from '../../components/Ads/vertical';
-import Card from '../../components/Card';
-import MainSlider from '../../components/MainSlider';
-
-const items = [
-  {
-      "src": "/assets/cupons/square/1.jpg",
-      "title": "Oba cupom 10% de desconto",
-      "description": "Oba cupom 10% de desconto",
-      "link": "",
-      "validate": new Date().toLocaleDateString(),
-      "shop": "",
-  },{
-    "src": "https://images.unsplash.com/photo-1550317138-10000687a72b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1520&q=80",
-    "title": "Cupom para hamburger",
-    "description": "35% de desconto no hamburger",
-    "link": "",
-    "validate": new Date().toLocaleDateString(),
-    "shop": "",
-},{
-  "src": "/assets/cupons/square/1.jpg",
-  "title": "Oba cupom 10% de desconto",
-  "description": "Oba cupom 10% de desconto",
-  "link": "",
-  "validate": new Date().toLocaleDateString(),
-  "shop": "",
-},{
-  "src": "/assets/cupons/square/1.jpg",
-  "title": "Oba cupom 10% de desconto",
-  "description": "Oba cupom 10% de desconto",
-  "link": "",
-  "validate": new Date().toLocaleDateString(),
-  "shop": "",
-}
-]
+import axios from "axios";
+import React from "react";
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import AdsVertical from "../../components/Ads/vertical";
+import Card from "../../components/Card";
+import Categories from "../../components/Categories";
+import MainSlider from "../../components/MainSlider";
 
 function Home() {
+  const { data: couponsData } = useQuery("coupons-gest", async () =>
+    axios
+      .get(`${process.env.REACT_APP_API}/v1/coupon/get-all-coupons`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.data.data)
+  );
+
+  const { data: categoriesData } = useQuery("categories-gest", async () =>
+    axios
+      .get(`${process.env.REACT_APP_API}/v1/category?per-page=5`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        return res.data.data;
+      })
+  );
+
   return (
     <>
-      
       <main>
         <MainSlider />
-  
+
         <section className="container mx-auto pt-12 bg-white">
-          <AdsHorizontal />
+          {/* <div className="flex flex-row flex-wrap items-center justify-center"> */}
+            <div className="grid justify-center md:grid-cols-2 lg:grid-cols-5 gap-5  my-10">
+              {categoriesData?.map((category, index) => (
+                <Categories key={index} data={category} />
+              ))}
+            </div>
+          {/* </div> */}
+          <div className="flex justify-end mr-3">
+            <button className="mr-3 mb-3 border-2 px-10 py-3 rounded-md text-1xl font-medium  transition duration-300 border-gray-500 text-gray-500 hover:border-primary hover:text-black hover:bg-primary">
+              <Link to="/categorias">Ver Todas as categorias</Link>
+            </button>
+          </div>
         </section>
 
         <section className="container mx-auto pt-12 bg-white">
           <div className="container mx-auto flex flex-col lg:flex-row gap-4">
-
             <div className="mt-6 lg:mt-0 lg:w-1/4 rounded-xl">
               <AdsVertical />
             </div>
-            
-            <div className="lg:w-2/3 rounded-xl">
-              {
-                items.map((item, index) => (
-                  <Card 
-                    key={index}
-                    src={item.src}
-                    title={item.title}
-                    description={item.description}
-                    link={item.link}
-                    validate={item.validate}
-                    shop={item.shop}
-                  />
-                ))
-              }
+
+            <div className="lg:w-2/3 rounded-xl mx-3 md:mx-auto">
+              {couponsData?.map((item, index) => (
+                <Card key={index} data={item} />
+              ))}
             </div>
-
-
           </div>
         </section>
-
       </main>
-    
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

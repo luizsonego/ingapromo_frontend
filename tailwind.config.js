@@ -2,7 +2,7 @@ module.exports = {
   mode: 'jit',
   content: [
     './src/components/**/*.jsx',
-    './src/pages/**/*.jsx'
+    './src/pages/**/*.jsx',
   ],
   theme: {
     extend: {},

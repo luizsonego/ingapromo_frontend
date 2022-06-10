@@ -54,10 +54,21 @@
 
 .bg-secondary {
     background-color: #294356;
+    color: #d5dee5;
 }
 
 .bg-secondary-lite {
-    background-color: #d5dee5;
+  background-color: #d5dee5;
+}
+
+.bg-green {
+    background-color: rgb(21 128 61);
+}
+.bg-red {
+  background-color: rgb(185 28 28);
+}
+.bg-orange {
+  background-color: rgb(194 65 12);
 }
 
 .product {
@@ -71,4 +82,33 @@
 }
 .product4 {
   background-image: url('https://i.ibb.co/42BsKQ2/2021-11-07-14h08-17.png');
+}
+
+table.adjusts-table
+{
+  table-layout: auto;
+  width: 100%;
+}
+
+.value-discount
+{
+  /* background-color: #f9b529; */
+  width: 100%;
+  height: 35px;
+  
+  /* opacity: 0.5;
+  filter: bac; */
+  
+  /* transform: rotate(-45deg); */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position: absolute; */
+}
+
+.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
 }

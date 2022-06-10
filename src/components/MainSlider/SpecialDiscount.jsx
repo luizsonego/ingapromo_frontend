@@ -5,7 +5,7 @@ const image = '/assets/cupons/square/2.webp';
 const SpecialDiscount = () => {
     return (
 			<div 
-				className="mt-6 lg:mt-0 lg:ml-6 lg:w-1/3 rounded-xl bg-primary-lite bg-cover p-8 md:p-16"
+				className="mt-6 lg:mt-0 lg:ml-6 sm:w-full lg:w-1/3 rounded-xl bg-primary-lite bg-cover p-8 md:p-16 h-72 md:h-auto"
 				style={{'backgroundImage': `url(${image})`}}
 			>
 				<div className="max-w-sm hidden">
