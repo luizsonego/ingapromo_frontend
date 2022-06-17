@@ -1,11 +1,9 @@
 import axios from "axios";
-import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import AdsVertical from "../../components/Ads/vertical";
 import Card from "../../components/Card";
 import Categories from "../../components/Categories";
-import MainSlider from "../../components/MainSlider";
 
 function Home() {
   const { data: couponsData } = useQuery("coupons-gest", async () =>
@@ -33,15 +31,15 @@ function Home() {
   return (
     <>
       <main>
-        <MainSlider />
+        {/* <MainSlider /> */}
 
         <section className="container mx-auto pt-12 bg-white">
           {/* <div className="flex flex-row flex-wrap items-center justify-center"> */}
-            <div className="grid justify-center md:grid-cols-2 lg:grid-cols-5 gap-5  my-10">
-              {categoriesData?.map((category, index) => (
-                <Categories key={index} data={category} />
-              ))}
-            </div>
+          <div className="grid justify-center md:grid-cols-2 lg:grid-cols-5 gap-5  my-10">
+            {categoriesData?.map((category, index) => (
+              <Categories key={index} data={category} />
+            ))}
+          </div>
           {/* </div> */}
           <div className="flex justify-end mr-3">
             <button className="mr-3 mb-3 border-2 px-10 py-3 rounded-md text-1xl font-medium  transition duration-300 border-gray-500 text-gray-500 hover:border-primary hover:text-black hover:bg-primary">

@@ -1,7 +1,7 @@
 import { IKImage } from "imagekitio-react";
 import { Link } from "react-router-dom";
 import checkIsPercentageOrValue from "../../helpers/checkIsPercentageOrValue";
-import { fDateEpoch, fEndDate } from "../../helpers/dateConvertEpochToHuman";
+import { fDate, fEndDate } from "../../helpers/dateConvertEpochToHuman";
 
 function Card({ data }) {
   return (
@@ -20,7 +20,7 @@ function Card({ data }) {
                 alt="sem imagem"
                 with="200"
                 height="200"
-                src="https://ui-avatars.com/api/?name=sem+imagem&background=cccccc&color=ddd"
+                src="/assets/no-image.jpg"
                 className="h-48 w-full object-cover md:h-full md:w-48"
               />
             ) : (
@@ -57,12 +57,12 @@ function Card({ data }) {
               <div className="h-16 flex justify-between items-center px-8">
                 <div>
                   <p className="font-semibold text-sm text-gray-400">
-                    Válido Até - {fDateEpoch(data?.end_date)}{" "}
+                    Válido Até - {fDate(data?.end_date)}{" "}
                   </p>
                 </div>
                 <div className="">
                   <Link to={`/cupom/${data?.id}`}>
-                    <div className="bg-secondary rounded-md p-2 flex items-center justify-center">
+                    <div className="bg-secondary hover:bg-primary rounded-md p-2 flex items-center justify-center">
                       Ver cupom
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

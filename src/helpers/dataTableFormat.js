@@ -1,3 +1,4 @@
+import { checkLocalization, checkType } from './bannerHelper';
 import checkStatus from "./checkStatus";
 import { fDate, fDateEpoch } from "./dateConvertEpochToHuman";
 
@@ -21,6 +22,12 @@ function dataTableFormat(column, value)
     
     case 'end_date':
       return fDateEpoch(value);
+    
+    case 'type':
+      return checkType(value);
+    
+    case 'location':
+      return checkLocalization(value);
       
     default:
       return value;

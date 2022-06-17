@@ -8,7 +8,6 @@ function Table(props) {
     return <div>Loading...</div>;
   }
 
-  console.log(props);
   return (
     <>
       <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">

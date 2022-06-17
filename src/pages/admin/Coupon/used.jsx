@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import NavBarAdmin from "../../../components/NavBarAdmin";
-import { fDateEpoch } from "../../../helpers/dateConvertEpochToHuman";
+import { fDate } from "../../../helpers/dateConvertEpochToHuman";
 
 const UsedCoupon = () => {
   const [show, setShow] = useState(null);
@@ -11,7 +12,7 @@ const UsedCoupon = () => {
     () =>
       axios
         .get(
-          `${process.env.REACT_APP_API}/v1/coupons-consumer/coupons?expand=consumer,coupon`,
+          `${process.env.REACT_APP_API}/v1/coupons-consumer/coupons?expand=consumer,coupon,store`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -29,6 +30,8 @@ const UsedCoupon = () => {
     }
   );
 
+  const handleOpenDetails = () => {};
+
   return (
     <div>
       <NavBarAdmin title="Meus Cupons" />
@@ -36,7 +39,7 @@ const UsedCoupon = () => {
       <div>
         <div className="w-full">
           <div className="bg-white py-4 md:py-7 ">
-            <div className="sm:flex items-center justify-between">
+            {/* <div className="sm:flex items-center justify-between">
               <div className="flex items-center">
                 <a href="javascript:void(0)">
                   <div className="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
@@ -54,7 +57,7 @@ const UsedCoupon = () => {
                   </div>
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div className="mt-7  w-full">
               <table className="w-full whitespace-nowrap">
@@ -64,6 +67,10 @@ const UsedCoupon = () => {
                       const title = item.coupon.title;
                       return (
                         <tr className="h-16 border border-gray-100 rounded">
+                          <td className="px-3" onClick={handleOpenDetails}>
+                            {" "}
+                            {">"}{" "}
+                          </td>
                           <td className>
                             <div className="flex items-center pl-5">
                               <p className="text-base font-medium leading-none text-gray-700 mr-2">
@@ -97,30 +104,22 @@ const UsedCoupon = () => {
                             <div className="flex items-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
                                 width={20}
                                 height={20}
-                                viewBox="0 0 20 20"
                                 fill="none"
+                                stroke="#52525B"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
                               >
                                 <path
-                                  d="M9.16667 2.5L16.6667 10C17.0911 10.4745 17.0911 11.1922 16.6667 11.6667L11.6667 16.6667C11.1922 17.0911 10.4745 17.0911 10 16.6667L2.5 9.16667V5.83333C2.5 3.99238 3.99238 2.5 5.83333 2.5H9.16667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <circle
-                                  cx="7.50004"
-                                  cy="7.49967"
-                                  r="1.66667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                                 />
                               </svg>
                               <p className="text-sm leading-none text-gray-600 ml-2">
-                                Urgent
+                                {item.store.name}
                               </p>
                             </div>
                           </td>
@@ -128,112 +127,63 @@ const UsedCoupon = () => {
                             <div className="flex items-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="#52525B"
+                                stroke-width="2"
                                 width={20}
                                 height={20}
-                                viewBox="0 0 20 20"
-                                fill="none"
                               >
                                 <path
-                                  d="M7.5 5H16.6667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M7.5 10H16.6667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M7.5 15H16.6667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M4.16669 5V5.00667"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M4.16669 10V10.0067"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M4.16669 15V15.0067"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                 />
                               </svg>
                               <p className="text-sm leading-none text-gray-600 ml-2 text-center">
                                 <small>Cupom valido até</small> <br />
-                                {fDateEpoch(item.expire_at)}
+                                {fDate(item.expire_at)}
                               </p>
                             </div>
                           </td>
-                          <td className="pl-5">
-                            <div className="flex items-center">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width={20}
-                                height={20}
-                                viewBox="0 0 20 20"
-                                fill="none"
-                              >
-                                <path
-                                  d="M3.33331 17.4998V6.6665C3.33331 6.00346 3.59671 5.36758 4.06555 4.89874C4.53439 4.4299 5.17027 4.1665 5.83331 4.1665H14.1666C14.8297 4.1665 15.4656 4.4299 15.9344 4.89874C16.4033 5.36758 16.6666 6.00346 16.6666 6.6665V11.6665C16.6666 12.3295 16.4033 12.9654 15.9344 13.4343C15.4656 13.9031 14.8297 14.1665 14.1666 14.1665H6.66665L3.33331 17.4998Z"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M10 9.1665V9.17484"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M6.66669 9.1665V9.17484"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M13.3333 9.1665V9.17484"
-                                  stroke="#52525B"
-                                  strokeWidth="1.25"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                              <p className="text-sm leading-none text-gray-600 ml-2">
-                                23
-                              </p>
-                            </div>
-                          </td>
-                          <td className="pl-5">
+
+                          {/* <td className="pl-5">
                             <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-500 bg-red-100 hover:bg-red-200 rounded">
                               {item.date_of_use}
                             </button>
-                          </td>
+                          </td> */}
                           <td className="pl-4">
-                            <button className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
-                              Ver
-                            </button>
+                            <Link
+                              to={`/cupom/${item?.coupon.id}`}
+                              target="_blank"
+                            >
+                              <button className="text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                                Ver
+                              </button>
+                            </Link>
+                          </td>
+                          <td className="pl-1">
+                            <Link
+                              to={`/cupom/${item?.coupon.id}`}
+                              target="_blank"
+                            >
+                              <button className="text-sm leading-none text-gray-600 p-3 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-4 w-4"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                    clip-rule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       );

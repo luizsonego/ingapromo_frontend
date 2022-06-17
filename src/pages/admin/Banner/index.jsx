@@ -26,10 +26,6 @@ const columns = [
     selector: "location",
   },
   {
-    name: "Loja",
-    selector: "store_id",
-  },
-  {
     name: "Status",
     selector: "status",
   },
@@ -59,8 +55,6 @@ function Banner() {
       staleTime: 3000,
     }
   );
-
-  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

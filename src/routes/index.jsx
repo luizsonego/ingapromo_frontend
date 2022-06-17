@@ -24,6 +24,7 @@ import Category from "../pages/Category";
 import Coupon from "../pages/Coupon";
 import Error404 from "../pages/Error/404";
 import Home from "../pages/Home";
+import ProfileShop from "../pages/ProfileShop";
 import { isAuthenticated } from "../services/auth";
 
 export default function MainRouter() {
@@ -93,8 +94,9 @@ export default function MainRouter() {
       children: [
         { path: "", element: <Home /> },
         { path: "categorias", element: <Categories /> },
-        { path: "categoria/:id", element: <Category /> },
+        { path: "categoria/:slug", element: <Category /> },
         { path: "cupom/:id", element: <Coupon /> },
+        { path: "loja/:id", element: <ProfileShop /> },
       ],
     },
     /**Login/Sign */

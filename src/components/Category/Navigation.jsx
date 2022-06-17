@@ -70,7 +70,7 @@ const NavigationCategory = () => {
             {categoriesData?.map((cat, index) => (
               <Link
                 key={index}
-                to={cat.slug}
+                to={`categoria/${cat.slug}`}
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
                 title=""
               >

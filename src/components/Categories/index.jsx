@@ -6,7 +6,7 @@ const Categories = (props) => {
   const { data } = props;
   return (
     <div>
-      <Link to={`/categoria/${data.id}`}>
+      <Link to={`/categoria/${data.slug}`}>
         <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row relative">
           <div className="w-full h-58 max-h-58">
             {!data.imageFilePath ? (

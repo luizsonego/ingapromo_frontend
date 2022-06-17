@@ -37,5 +37,6 @@ export function convertToEpoch(date) {
 }
 
 export function fEndDate(date) {
-  return formatDistanceToNow(new Date(convertToEpoch(date)), { addSuffix: true, locale: ptBR });
+  return formatDistanceToNow(new Date(date), { addSuffix: true, locale: ptBR });
 }
+
