@@ -25,7 +25,7 @@ function Layout() {
 
           <nav className="contents">
             <ul className="ml-4 xl:w-48 flex items-center justify-end">
-              <li className="ml-2 lg:ml-4 relative inline-block">
+              {/* <li className="ml-2 lg:ml-4 relative inline-block">
                 <Link to="#">
                   <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">
                     3
@@ -45,9 +45,9 @@ function Layout() {
                     ></path>
                   </svg>
                 </Link>
-              </li>
+              </li> */}
 
-              <li className="ml-2 lg:ml-4 relative inline-block">
+              {/* <li className="ml-2 lg:ml-4 relative inline-block">
                 <Link to="/">
                   <svg
                     className="h-9 lg:h-10 p-2 text-gray-500 svg-inline--fa fa-user fa-w-14 fa-9x"
@@ -64,7 +64,7 @@ function Layout() {
                     ></path>
                   </svg>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
 

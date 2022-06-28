@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IKImage } from "imagekitio-react";
+import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import CardAdmin from "../../../components/CardAdmin";
@@ -113,7 +114,7 @@ const Company = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-2 my-3">
+          <div className="flex justify-center items-center gap-2 my-3">
             {data.whatsapp && (
               <div className="font-semibold text-center mx-4">
                 <span className="text-gray-400">Whatsapp</span>

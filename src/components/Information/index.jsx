@@ -1,4 +1,3 @@
-import React from "react";
 import { useModalWithData } from "../../helpers/modalHooks";
 import ModalContent from "../Modal";
 import Table from "../Table";

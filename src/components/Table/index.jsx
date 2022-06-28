@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import dataTableFormat from "../../helpers/dataTableFormat";
 
@@ -29,13 +28,13 @@ function Table(props) {
                 className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
               >
                 {columns.map((column, index) => (
-                  <td key={index} className="px-2 cursor-pointer">
+                  <td key={index} className="px-2 cursor-pointer w-1">
                     {column.selector === "imageUrl" && (
                       <div className="flex items-center">
                         <div className="w-10 h-10">
                           <img
                             className="w-full h-full"
-                            src={item.imageUrl}
+                            src={item.imageUrl || "/assets/no-image.jpg"}
                             alt="imagem"
                           />
                         </div>
