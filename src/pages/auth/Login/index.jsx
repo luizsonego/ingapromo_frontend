@@ -11,7 +11,7 @@ const Login = () => {
 
     const loginUser = async (user) => {
 
-        const response = await axios.post(`${process.env.REACT_APP_API}site/login`, user, {
+        const response = await axios.post(`${process.env.REACT_APP_API}/site/login`, user, {
             headers: {
                 'Content-Type': 'application/json'
             }

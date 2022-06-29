@@ -11,7 +11,7 @@ const Signup = () => {
 
   const createUser = async (user) => {
     await axios
-      .post("http://localhost:8000/signup", user, {
+      .post(`${process.env.REACT_APP_API}/site/signup`, user, {
         headers: {
           "Content-Type": "application/json",
         },
