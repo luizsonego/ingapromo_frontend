@@ -1,43 +1,46 @@
-import axios from "axios";
-import React from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+import React from 'react'
+import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
-  let navigate = useNavigate();
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  let navigate = useNavigate()
+  const [username, setUsername] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = React.useState('')
 
   const createUser = async (user) => {
     await axios
       .post(`${process.env.REACT_APP_API}/site/signup`, user, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
       .then((res) => {
         if (res.data) {
-          navigate("/login");
+          navigate('/login')
         }
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
 
-  const { mutate } = useMutation(createUser);
+  const { mutate } = useMutation(createUser)
 
   const handleSubmitUser = (data) => {
-    data.preventDefault();
+    data.preventDefault()
     const user = {
       email,
       username,
       password,
-    };
-    mutate(user);
-  };
+    }
+    mutate(user)
+  }
 
   return (
-    <div className="h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4">
+    <div
+      className="h-full bg-primary-lite w-full py-16 px-4"
+      style={{ height: '100vh' }}
+    >
       <div className="flex flex-col items-center justify-center">
         {/* LOGO */}
         <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
@@ -48,7 +51,7 @@ const Signup = () => {
           >
             Cadastre-se
           </p>
-          <button
+          {/* <button
             aria-label="Continue with google"
             className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
           >
@@ -79,14 +82,14 @@ const Signup = () => {
             <p className="text-base font-medium ml-4 text-gray-700">
               Continue with Google
             </p>
-          </button>
+          </button> */}
 
           <div className="w-full flex items-center justify-between py-5">
-            <hr className="w-full bg-gray-400" />
+            {/* <hr className="w-full bg-gray-400" />
             <p className="text-base font-medium leading-4 px-2.5 text-gray-400">
               OR
             </p>
-            <hr className="w-full bg-gray-400  " />
+            <hr className="w-full bg-gray-400  " /> */}
           </div>
 
           <form onSubmit={handleSubmitUser}>
@@ -105,7 +108,7 @@ const Signup = () => {
 
             <div>
               <label className="text-sm font-medium leading-none text-gray-800">
-                UserName
+                Usuário
               </label>
               <input
                 aria-label="enter email adress"
@@ -149,13 +152,13 @@ const Signup = () => {
                 aria-label="create my account"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
               >
-                Create my account
+                Criar minha conta
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  );
-};
-export default Signup;
+  )
+}
+export default Signup
