@@ -13,10 +13,10 @@ const menuOptions = [
     name: 'Inicio',
     link: '/',
   },
-  // {
-  //   name: 'Cupons',
-  //   link: '/cupons',
-  // },
+  {
+    name: 'Categorias',
+    link: '/categorias',
+  },
 ]
 
 const NavBar = () => {
@@ -94,7 +94,7 @@ const NavBar = () => {
                       onClick={() => setProfile(!profile)}
                     >
                       {profile && (
-                        <ul className="p-2 w-40 border-r bg-white absolute rounded right-0 shadow top-0 mt-16 ">
+                        <ul className="p-2 w-40 border-r bg-white absolute rounded right-0 shadow top-0 mt-16 z-10">
                           <li className="my-2 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                             <Link to="/admin">
                               <div className="flex items-center">

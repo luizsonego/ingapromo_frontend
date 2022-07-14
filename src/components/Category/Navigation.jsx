@@ -1,4 +1,4 @@
-import { Popover, Transition } from "@headlessui/react";
+import { Popover, Transition } from '@headlessui/react'
 import {
   BookmarkAltIcon,
   CalendarIcon,
@@ -6,57 +6,57 @@ import {
   ShieldCheckIcon,
   SupportIcon,
   XIcon,
-} from "@heroicons/react/outline";
-import axios from "axios";
-import React, { Fragment } from "react";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+} from '@heroicons/react/outline'
+import axios from 'axios'
+import { Fragment } from 'react'
+import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 
 const resources = [
   {
-    name: "Help Center",
+    name: 'Help Center',
     description:
-      "Get all of your questions answered in our forums or contact support.",
-    href: "#",
+      'Get all of your questions answered in our forums or contact support.',
+    href: '#',
     icon: SupportIcon,
   },
   {
-    name: "Guides",
+    name: 'Guides',
     description:
-      "Learn how to maximize our platform to get the most out of it.",
-    href: "#",
+      'Learn how to maximize our platform to get the most out of it.',
+    href: '#',
     icon: BookmarkAltIcon,
   },
   {
-    name: "Events",
+    name: 'Events',
     description:
-      "See what meet-ups and other events we might be planning near you.",
-    href: "#",
+      'See what meet-ups and other events we might be planning near you.',
+    href: '#',
     icon: CalendarIcon,
   },
   {
-    name: "Security",
-    description: "Understand how we take your privacy seriously.",
-    href: "#",
+    name: 'Security',
+    description: 'Understand how we take your privacy seriously.',
+    href: '#',
     icon: ShieldCheckIcon,
   },
-];
+]
 
 const NavigationCategory = () => {
-  const { data: categoriesData } = useQuery("categories-navbar", async () =>
+  const { data: categoriesData } = useQuery('categories-navbar', async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/category?per-page=7`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
       .then((res) => {
-        return res.data.data;
-      })
-  );
+        return res.data.data
+      }),
+  )
 
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-sm">
+    <div className="sticky top-0 z-50 bg-white shadow-sm sm:hidden md:block">
       <Popover className="sticky top-0 bg-white py-3 flex justify-between">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="-mr-2 -my-2 md:hidden">
@@ -67,16 +67,20 @@ const NavigationCategory = () => {
           </div>
 
           <Popover.Group as="nav" className="hidden md:flex space-x-10">
-            {categoriesData?.map((cat, index) => (
-              <Link
-                key={index}
-                to={`categoria/${cat.slug}`}
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-                title=""
-              >
-                {cat.name}
-              </Link>
-            ))}
+            {categoriesData?.map((cat, index) =>
+              cat > 0 ? (
+                <Link
+                  key={index}
+                  to={`categoria/${cat.slug}`}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                  title=""
+                >
+                  {cat.name}
+                </Link>
+              ) : (
+                <></>
+              ),
+            )}
           </Popover.Group>
         </div>
 
@@ -144,7 +148,7 @@ const NavigationCategory = () => {
                     Sign up
                   </Link>
                   <p className="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?{" "}
+                    Existing customer?{' '}
                     <Link
                       to="#"
                       className="text-indigo-600 hover:text-indigo-500"
@@ -159,7 +163,7 @@ const NavigationCategory = () => {
         </Transition>
       </Popover>
     </div>
-  );
-};
+  )
+}
 
-export default NavigationCategory;
+export default NavigationCategory

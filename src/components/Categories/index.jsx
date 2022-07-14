@@ -1,14 +1,16 @@
-import { IKImage } from "imagekitio-react";
-import React from "react";
-import { Link } from "react-router-dom";
+import { IKImage } from 'imagekitio-react'
+import { Link } from 'react-router-dom'
 
 const Categories = (props) => {
-  const { data } = props;
+  const { data } = props
   return (
     <div>
       <Link to={`/categoria/${data.slug}`}>
         <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row relative">
-          <div className="w-full h-58 max-h-58">
+          <div
+            className="w-full h-58 min-h-58 max-h-58"
+            style={{ height: '180px' }}
+          >
             {!data.imageFilePath ? (
               <img
                 alt="sem imagem"
@@ -31,7 +33,7 @@ const Categories = (props) => {
         </h5>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories
