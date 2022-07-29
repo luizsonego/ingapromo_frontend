@@ -1,27 +1,61 @@
+import axios from 'axios'
 import { useState } from 'react'
+import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import Logo from '../Logo'
 
-var isLogged = localStorage.getItem(process.env.REACT_APP_ACCESS_TOKEN)
-const userInfo = {
-  name: 'Guest',
-  profilePic:
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-}
 const menuOptions = [
   {
     name: 'Inicio',
     link: '/',
   },
   {
+    name: 'Lojas',
+    link: '/lojas',
+  },
+  {
     name: 'Categorias',
     link: '/categorias',
+  },
+  {
+    name: 'Cupons',
+    link: '/cupons',
   },
 ]
 
 const NavBar = () => {
   const [show, setShow] = useState(null)
   const [profile, setProfile] = useState(false)
+  const { data, isLoading } = useQuery(['user'], async () =>
+    axios
+      .get(`${process.env.REACT_APP_API}/v1/user/get-user`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem(
+            process.env.REACT_APP_ACCESS_TOKEN,
+          )}`,
+        },
+      })
+      .then((res) => {
+        return res.data.data
+      }),
+  )
+
+  var isLogged = localStorage.getItem(process.env.REACT_APP_ACCESS_TOKEN)
+  const userInfo = {
+    name: data?.username,
+    profilePic: `https://ui-avatars.com/api/?name=${data?.username}`,
+  }
+  show
+    ? (document.body.style.overflow = 'hidden')
+    : (document.body.style.overflow = 'auto')
+
+  const logOut = () => {
+    localStorage.removeItem(process.env.REACT_APP_ACCESS_TOKEN)
+    setProfile(false)
+    setShow(false)
+  }
+
   return (
     <div className="bg-primary h-full w-full">
       <nav className="bg-primary shadow xl:block hidden">
@@ -37,7 +71,7 @@ const NavBar = () => {
                  */}
                 <div
                   className="hidden close-m-menu text-gray-700"
-                  onclick="MenuHandler(this,false)"
+                  // onClick="MenuHandler(this,false)"
                 >
                   <svg
                     aria-label="Close"
@@ -104,7 +138,9 @@ const NavBar = () => {
                           </li>
                           <li className="my-2 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                             <div className="flex items-center">
-                              <span className="ml-2">Sair</span>
+                              <span className="ml-2" onClick={logOut}>
+                                Sair
+                              </span>
                             </div>
                           </li>
                         </ul>
@@ -141,6 +177,8 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
+      {/* end navbar */}
+      {/* manu navbar mobile */}
       <nav>
         <div className="py-4 px-6 w-full flex xl:hidden justify-between items-center bg-primary fixed top-0 z-40">
           {/* 
@@ -188,8 +226,8 @@ const NavBar = () => {
         <div
           className={
             show
-              ? 'w-full xl:hidden h-full absolute z-40  transform  translate-x-0 '
-              : '   w-full xl:hidden h-full absolute z-40  transform -translate-x-full'
+              ? 'w-full xl:hidden h-full fixed z-40  transform  translate-x-0 top-0 overflow-hidden'
+              : 'w-full xl:hidden h-full absolute z-40  transform -translate-x-full'
           }
         >
           <div
@@ -279,7 +317,12 @@ const NavBar = () => {
                         </div>
                         <ul className="flex">
                           <li className="cursor-pointer text-gray-800 pt-5 pb-3 pl-3">
-                            <div className="w-6 h-6 md:w-8 md:h-8">sair</div>
+                            <div
+                              className="w-6 h-6 md:w-8 md:h-8"
+                              onClick={logOut}
+                            >
+                              sair
+                            </div>
                           </li>
                         </ul>
                       </div>
