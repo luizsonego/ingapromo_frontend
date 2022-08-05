@@ -1,124 +1,96 @@
 import {
   faBuilding,
   faCircleArrowDown,
+  faDollar,
   faGripHorizontal,
-  faTicket
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+  faSignOutAlt,
+  faTicket,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
-const iconLogout = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="icon icon-tabler icon-tabler-bell"
-    width={20}
-    height={20}
-    viewBox="0 0 24 24"
-    strokeWidth="1.5"
-    stroke="currentColor"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path stroke="none" d="M0 0h24v24H0z" />
-    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-  </svg>
-);
+const SideBar = ({ access = 'guess' }) => {
+  const logOut = () => {
+    localStorage.removeItem(process.env.REACT_APP_ACCESS_TOKEN)
+  }
 
-const iconSettings = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="icon icon-tabler icon-tabler-settings"
-    width={20}
-    height={20}
-    viewBox="0 0 24 24"
-    strokeWidth="1.5"
-    stroke="currentColor"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path stroke="none" d="M0 0h24v24H0z" />
-    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-    <circle cx={12} cy={12} r={3} />
-  </svg>
-);
-
-const SideBar = ({ access = "guess" }) => {
   const menuOptions = [
     {
-      name: "Dashboard",
-      link: "/admin",
+      name: 'Dashboard',
+      link: '/admin',
       icon: faGripHorizontal,
-      access_given: access === "shop" || "admin" ? true : false,
+      access_given: access === 'shop' || 'admin' ? true : false,
     },
     {
-      name: "Empresa",
-      link: "empresa",
+      name: 'Empresa',
+      link: 'empresa',
       icon: faBuilding,
-      access_given: access === "shop" ? true : false,
+      access_given: access === 'shop' ? true : false,
     },
     {
-      name: "Cupons",
-      link: "cupom",
+      name: 'Cupons',
+      link: 'cupom',
       icon: faTicket,
-      access_given: access === "shop" ? true : false,
+      access_given: access === 'shop' ? true : false,
     },
     {
-      name: "Categorias",
-      link: "categorias",
+      name: 'Cupons de cliente',
+      link: 'cupom-cliente',
+      icon: faDollar,
+      access_given: access === 'shop' ? true : false,
+    },
+    {
+      name: 'Categorias',
+      link: 'categorias',
       icon: faCircleArrowDown,
-      access_given: access === "admin" ? true : false,
+      access_given: access === 'admin' ? true : false,
     },
     {
-      name: "Banner",
-      link: "banner",
+      name: 'Banner',
+      link: 'banner',
       icon: faCircleArrowDown,
-      access_given: access === "admin" ? true : false,
+      access_given: access === 'admin' ? true : false,
     },
     {
-      name: "Empresas",
-      link: "empresas",
+      name: 'Empresas',
+      link: 'empresas',
       icon: faCircleArrowDown,
-      access_given: access === "admin" ? true : false,
+      access_given: access === 'admin' ? true : false,
     },
     {
-      name: "Cupons",
-      link: "manage-coupons",
+      name: 'Cupons',
+      link: 'manage-coupons',
       icon: faCircleArrowDown,
-      access_given: access === "admin" ? true : false,
+      access_given: access === 'admin' ? true : false,
     },
     {
-      name: "Cupons",
-      link: "meus-cupons",
+      name: 'Cupons',
+      link: 'meus-cupons',
       icon: faBuilding,
-      access_given: access === "customer" ? true : false,
-    }
-  ];
+      access_given: access === 'customer' ? true : false,
+    },
+  ]
 
   const menuFooter = [
     {
-      name: "Sair",
-      link: "/login",
-      icon: iconLogout,
+      name: 'Settings',
+      link: '/settings',
       access_given: true,
     },
     {
-      name: "Settings",
-      link: "/login",
-      icon: iconSettings,
+      name: 'Sair',
+      link: '',
+      icon: <FontAwesomeIcon icon={faSignOutAlt} onClick={() => logOut()} />,
       access_given: true,
     },
-  ];
+  ]
 
   return (
     <>
       {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
       <div
         className="w-64 fixed sm:relative bg-gray-800 shadow md:h-full flex-col justify-between flex"
-        style={{ height: "100vh", position: "fixed" }}
+        style={{ height: '100vh', position: 'fixed' }}
       >
         <div className="px-8">
           <div className="w-full flex items-center ">
@@ -126,7 +98,7 @@ const SideBar = ({ access = "guess" }) => {
               src="/assets/logo.png"
               height={30}
               alt=""
-              style={{ margin: "0 auto" }}
+              style={{ margin: '0 auto' }}
             />
           </div>
 
@@ -154,7 +126,7 @@ const SideBar = ({ access = "guess" }) => {
                     </li>
                   </Link>
                 )
-              );
+              )
             })}
           </ul>
         </div>
@@ -172,7 +144,7 @@ const SideBar = ({ access = "guess" }) => {
                     </li>
                   </Link>
                 )
-              );
+              )
             })}
           </ul>
         </div>
@@ -240,7 +212,7 @@ const SideBar = ({ access = "guess" }) => {
                     </li>
                   </Link>
                 )
-              );
+              )
             })}
           </ul>
         </div>
@@ -323,7 +295,7 @@ const SideBar = ({ access = "guess" }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar

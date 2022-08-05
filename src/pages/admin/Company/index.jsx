@@ -1,27 +1,27 @@
-import axios from "axios";
-import { IKImage } from "imagekitio-react";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import CardAdmin from "../../../components/CardAdmin";
-import NavBarAdmin from "../../../components/NavBarAdmin";
-import UploadProfilePic from "../../../components/UploadProfilePic";
-import { toSlugify } from "../../../helpers/stringToSlug";
+import axios from 'axios'
+import { IKImage } from 'imagekitio-react'
+import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
+import CardAdmin from '../../../components/CardAdmin'
+import NavBarAdmin from '../../../components/NavBarAdmin'
+import UploadProfilePic from '../../../components/UploadProfilePic'
+import { toSlugify } from '../../../helpers/stringToSlug'
 
 const Company = () => {
-  const { data } = useQuery("company", () =>
+  const { data } = useQuery('my-company', () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/store/get-store`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem(
-            process.env.REACT_APP_ACCESS_TOKEN
+            process.env.REACT_APP_ACCESS_TOKEN,
           )}`,
         },
       })
       .then((res) => {
-        return res.data.data;
-      })
-  );
+        return res.data.data
+      }),
+  )
 
   if (!data || data.length === 0 || !data) {
     return (
@@ -37,7 +37,7 @@ const Company = () => {
           abaixo
         </h1>
       </>
-    );
+    )
   }
 
   return (
@@ -82,7 +82,7 @@ const Company = () => {
               {data?.city}, {data?.state}
             </span>
             <span className="text-sm text-gray-400">
-              {data?.address}, {data?.number || "S/N"} - {data?.district} -{" "}
+              {data?.address}, {data?.number || 'S/N'} - {data?.district} -{' '}
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${data?.address}+${data?.number}+${data?.district}+${data?.city}+${data?.state}`}
                 target="_blank"
@@ -167,14 +167,12 @@ const Company = () => {
 
           <div className="grid grid-cols-2 gap-2 my-3">
             {data?.coupon.map((coupon, index) => {
-              return (
-                <CardAdmin key={index} data={coupon} uploadImage={false} />
-              );
+              return <CardAdmin key={index} data={coupon} uploadImage={false} />
             })}
           </div>
         </div>
       </div>
     </div>
-  );
-};
-export default Company;
+  )
+}
+export default Company

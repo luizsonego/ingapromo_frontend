@@ -1,4 +1,4 @@
-import UploadGeneric from "../UploadGeneric";
+import UploadGeneric from '../UploadGeneric'
 
 const ModalContent = ({
   isActive,
@@ -34,6 +34,7 @@ const ModalContent = ({
                 <div className="relative p-6 flex-auto">
                   {children}
                   {body ? body : null}
+
                   <UploadGeneric
                     title={data.title || data.name}
                     uriApi={`${path}/${data.id}`}
@@ -64,7 +65,7 @@ const ModalContent = ({
         </>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default ModalContent;
+export default ModalContent

@@ -1,10 +1,22 @@
-import { Link } from "react-router-dom";
-import dataTableFormat from "../../helpers/dataTableFormat";
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
+import dataTableFormat from '../../helpers/dataTableFormat'
+import ErrorEmpty from '../../pages/Error/Empty'
 
 function Table(props) {
-  const { columns, data, setSelected, setModalState, path } = props;
+  const {
+    columns,
+    data,
+    setSelected,
+    setModalState,
+    path,
+    actions = true,
+    details = false,
+  } = props
+
   if (data === undefined || data.length === 0 || data === null) {
-    return <div>Loading...</div>;
+    return <ErrorEmpty />
   }
 
   return (
@@ -18,7 +30,9 @@ function Table(props) {
                   {item.name}
                 </th>
               ))}
-              {!path ? "" : <th className="font-bold text-center">Ações</th>}
+              {!path
+                ? ''
+                : actions && <th className="font-bold text-center">Ações</th>}
             </tr>
           </thead>
           <tbody className="w-full">
@@ -29,20 +43,25 @@ function Table(props) {
               >
                 {columns.map((column, index) => (
                   <td key={index} className="px-2 cursor-pointer w-1">
-                    {column.selector === "imageUrl" && (
+                    {column.selector === 'imageUrl' && (
                       <div className="flex items-center">
                         <div className="w-10 h-10">
                           <img
                             className="w-full h-full"
-                            src={item.imageUrl || "/assets/no-image.jpg"}
+                            src={item.imageUrl || '/assets/no-image.jpg'}
                             alt="imagem"
                           />
                         </div>
                       </div>
                     )}
                     <p className="font-medium">
-                      {column.selector !== "imageUrl" &&
-                        dataTableFormat(column.selector, item[column.selector])}
+                      {column.selector !== 'imageUrl' &&
+                        dataTableFormat(
+                          column.selector,
+                          column.subSelector
+                            ? item[column.selector][column.subSelector]
+                            : item[column.selector],
+                        )}
                     </p>
                   </td>
                 ))}
@@ -51,28 +70,40 @@ function Table(props) {
                     <button
                       className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-primary"
                       onClick={() => {
-                        setSelected(item);
-                        setModalState(true);
+                        setSelected(item)
+                        setModalState(true)
                       }}
                     >
                       Upload
                     </button>
                   )}
 
-                  {!path ? (
-                    ""
-                  ) : (
-                    <>
-                      <Link to={`editar/${item.id}`}>
-                        <button className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-primary">
-                          Editar
-                        </button>
-                      </Link>
-                      <button className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-red">
-                        Excluir
-                      </button>
-                    </>
+                  {details && (
+                    <button
+                      className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-primary"
+                      onClick={() => {
+                        setSelected(item)
+                        setModalState(true)
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
                   )}
+
+                  {!path
+                    ? ''
+                    : actions && (
+                        <>
+                          <Link to={`editar/${item.id}`}>
+                            <button className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-primary">
+                              Editar
+                            </button>
+                          </Link>
+                          <button className="focus:ring-2 focus:ring-offset-2 text-sm font-semibold leading-none text-white focus:outline-none border rounded py-4 px-3 px-4 bg-red">
+                            Excluir
+                          </button>
+                        </>
+                      )}
                 </td>
               </tr>
             ))}
@@ -80,7 +111,7 @@ function Table(props) {
         </table>
       </div>
     </>
-  );
+  )
 }
 
-export default Table;
+export default Table

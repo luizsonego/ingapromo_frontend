@@ -14,6 +14,7 @@ import AdminCoupon from '../pages/admin/Coupon'
 import CreateCoupon from '../pages/admin/Coupon/create'
 import CouponEdit from '../pages/admin/Coupon/edit'
 import UsedCoupon from '../pages/admin/Coupon/used'
+import CouponsClients from '../pages/admin/CouponsClients'
 import Dashboard from '../pages/admin/Dashboard'
 import ManageCompanies from '../pages/admin/ManageCompanies'
 import ManageCoupons from '../pages/admin/ManageCoupons'
@@ -52,6 +53,10 @@ export default function MainRouter() {
             { path: 'criar', element: <CreateCoupon /> },
             { path: 'editar/:id', element: <CouponEdit /> },
           ],
+        },
+        {
+          path: 'cupom-cliente',
+          children: [{ path: '', element: <CouponsClients /> }],
         },
         {
           path: 'meus-cupons',

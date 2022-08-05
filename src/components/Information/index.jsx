@@ -1,11 +1,10 @@
-import { useModalWithData } from "../../helpers/modalHooks";
-import ModalContent from "../Modal";
-import Table from "../Table";
+import { useModalWithData } from '../../helpers/modalHooks'
+import ModalContent from '../Modal'
+import Table from '../Table'
 
 function Information(props) {
-  const { modalOpen, selected, setSelected, setModalState } =
-    useModalWithData();
-  const { columns, data, modalTitle, components } = props;
+  const { modalOpen, selected, setSelected, setModalState } = useModalWithData()
+  const { columns, data, modalTitle, components } = props
   return (
     <>
       <ModalContent
@@ -26,9 +25,11 @@ function Information(props) {
         columns={columns}
         setSelected={setSelected}
         setModalState={setModalState}
+        actions={props.actions}
+        details={props.details}
       />
     </>
-  );
+  )
 }
 
-export default Information;
+export default Information
