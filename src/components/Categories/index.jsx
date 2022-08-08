@@ -1,7 +1,11 @@
 import { IKImage } from 'imagekitio-react'
 import { Link } from 'react-router-dom'
+import SkeletonLoading from './SkeletonLoading'
 
-const Categories = ({ data }) => {
+const Categories = ({ data, loading }) => {
+  if (loading) {
+    return <SkeletonLoading />
+  }
   return (
     <>
       <div className="grid justify-center grid-cols-5 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5 my-10 px-2 md:px-0">

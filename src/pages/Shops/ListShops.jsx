@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import SkeletonLoading from './SkeletonLoading'
 
 const ListShops = () => {
-  const { data: listOfShops } = useQuery('list-store', async () =>
+  const { data: listOfShops, isLoading } = useQuery('list-store', async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/store`, {
         headers: {
@@ -14,6 +15,10 @@ const ListShops = () => {
         return res.data
       }),
   )
+
+  if ( isLoading ) {
+    return <SkeletonLoading />
+  }
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">

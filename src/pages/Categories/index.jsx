@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import SkeletonLoading from './SkeletonLoading'
 
 const Categories = () => {
-  const { data } = useQuery('list-categories', async () =>
+  const { data, isLoading } = useQuery('list-categories', async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/category`, {
         headers: {
@@ -15,13 +16,19 @@ const Categories = () => {
       }),
   )
 
+if (isLoading) {
+  return <SkeletonLoading />
+}
+
   return (
+    <>
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
       <div className="text-center pb-12">
         <h1 className="font-bold text-2xl md:text-4xl lg:text-5xl font-heading text-gray-900">
           Categorias
         </h1>
       </div>
+
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {data?.map((category, index) => (
@@ -53,6 +60,7 @@ const Categories = () => {
         ))}
       </div>
     </section>
+    </>
   )
 }
 

@@ -2,10 +2,11 @@ import axios from 'axios'
 import { useQuery } from 'react-query'
 import AdsVertical from '../../components/Ads/vertical'
 import Card from '../../components/Card'
+import SkeletonLoading from '../../components/Card/SkeletonLoading'
 import Categories from '../../components/Categories'
 
 function Home() {
-  const { data: couponsData } = useQuery('coupons-gest', async () =>
+  const { data: couponsData, isLoading: couponsLoading } = useQuery('coupons-gest', async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/coupon/get-all-coupons`, {
         headers: {
@@ -15,7 +16,7 @@ function Home() {
       .then((res) => res.data.data),
   )
 
-  const { data: categoriesData } = useQuery('categories-gest', async () =>
+  const { data: categoriesData, isLoading: categoriesLoading } = useQuery('categories-gest', async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/category?per-page=5`, {
         headers: {
@@ -33,7 +34,7 @@ function Home() {
         {/* <MainSlider /> */}
 
         <section className="container mx-auto pt-12">
-          {categoriesData && <Categories data={categoriesData} />}
+          <Categories data={categoriesData} loading={categoriesLoading} />
         </section>
 
         <section className="container mx-auto pt-12">
@@ -43,8 +44,9 @@ function Home() {
             </div>
 
             <div className="lg:w-auto rounded-xl mx-2 md:mx-auto">
-              {couponsData?.map((item, index) => (
-                <Card key={index} data={item} />
+              {couponsLoading && (<SkeletonLoading />)}
+              {couponsData?.map((item) => (
+                <Card data={item} key={item.id} />
               ))}
             </div>
           </div>
