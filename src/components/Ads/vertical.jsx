@@ -2,6 +2,7 @@ import axios from 'axios'
 import { IKImage } from 'imagekitio-react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
+import SkeletonLoading from './SkeletonLoading'
 
 const AdsVertical = () => {
   const { data: bannerAds, isLoading } = useQuery('banners-ads', async () =>
@@ -24,7 +25,7 @@ const AdsVertical = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <SkeletonLoading />
   }
 
   return (

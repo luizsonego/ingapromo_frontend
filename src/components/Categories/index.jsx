@@ -12,7 +12,7 @@ const Categories = ({ data, loading }) => {
         {data?.map((category, index) => (
           <Link to={`/categoria/${category.slug}`} key={index}>
             <div className="w-full bg-white rounded-full md:rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row relative">
-              <div className="w-full h-58 min-h-58 max-h-58 md:h-32">
+              <div className="w-20 h-20 md:w-full md:h-32">
                 {!category.imageFilePath ? (
                   <img
                     alt={category.name}
