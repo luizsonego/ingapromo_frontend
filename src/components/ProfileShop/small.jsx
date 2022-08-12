@@ -12,7 +12,7 @@ const ProfileSmall = ({ data, count }) => {
               with="150"
               height="150"
               src="/assets/no-image.jpg"
-              className="h-36 object-cover rounded-full"
+              className="h-36 w-36 object-cover rounded-full"
             />
           ) : (
             <img
@@ -20,7 +20,7 @@ const ProfileSmall = ({ data, count }) => {
               with="150"
               height="150"
               src={data?.image}
-              className="h-36 object-cover rounded-full"
+              className="h-36 w-36 object-cover rounded-full"
             />
           )}
         </div>

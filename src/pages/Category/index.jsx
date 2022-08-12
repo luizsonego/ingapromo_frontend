@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import AdsVertical from '../../components/Ads/vertical'
 import Card from '../../components/Card'
+import SkeletonLoading from '../../components/Card/SkeletonLoading'
 
 const Category = () => {
   let params = useParams()
@@ -23,10 +24,6 @@ const Category = () => {
         }),
   )
 
-  if (isLoading) {
-    return <h1>Carregando...</h1>
-  }
-
   return (
     <section className="container mx-auto pt-12 ">
       <div className="text-center pb-2 md:pb-5 pt-7 md:pt-0">
@@ -41,6 +38,7 @@ const Category = () => {
         </div>
 
         <div className="lg:w-auto rounded-xl mx-2 md:mx-auto">
+          {isLoading && (<SkeletonLoading />)}
           {data?.coupon?.map((item, index) => (
             <Card key={index} data={item} />
           ))}

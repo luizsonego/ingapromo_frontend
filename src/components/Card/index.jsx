@@ -4,7 +4,7 @@ import checkIsPercentageOrValue from '../../helpers/checkIsPercentageOrValue'
 import { fDate } from '../../helpers/dateConvertEpochToHuman'
 
 function Card({ data }) {
-  
+  console.log(data)
   return (
     <div className="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:mx-5 mt-3">
       <div className="md:flex">

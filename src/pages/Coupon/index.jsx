@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ProfileSmall from '../../components/ProfileShop/small'
 import checkIsPercentageOrValue from '../../helpers/checkIsPercentageOrValue'
 import { fDate } from '../../helpers/dateConvertEpochToHuman'
+import SkeletonLoading from './SkeletonLoading'
 
 const Coupon = () => {
   const { id } = useParams()
@@ -54,7 +55,7 @@ const Coupon = () => {
   }, [])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <SkeletonLoading />
   }
 
   const handleUseCoupon = () => {

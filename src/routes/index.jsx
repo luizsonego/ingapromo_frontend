@@ -23,6 +23,7 @@ import Signup from '../pages/auth/Signup'
 import Categories from '../pages/Categories'
 import Category from '../pages/Category'
 import Coupon from '../pages/Coupon'
+import AllCoupons from '../pages/Coupons'
 import Error404 from '../pages/Error/404'
 import Home from '../pages/Home'
 import ProfileShop from '../pages/ProfileShop'
@@ -101,6 +102,7 @@ export default function MainRouter() {
         { path: '', element: <Home /> },
         { path: 'categorias', element: <Categories /> },
         { path: 'categoria/:slug', element: <Category /> },
+        { path: 'cupons', element: <AllCoupons /> },
         { path: 'cupom/:id', element: <Coupon /> },
         { path: 'loja/:id', element: <ProfileShop /> },
         { path: 'lojas', element: <ListShops /> },
