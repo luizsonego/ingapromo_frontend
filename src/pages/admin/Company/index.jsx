@@ -3,12 +3,13 @@ import { IKImage } from 'imagekitio-react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import CardAdmin from '../../../components/CardAdmin'
+import LoadingAdmin from '../../../components/LoadingAdmin'
 import NavBarAdmin from '../../../components/NavBarAdmin'
 import UploadProfilePic from '../../../components/UploadProfilePic'
 import { toSlugify } from '../../../helpers/stringToSlug'
 
 const Company = () => {
-  const { data } = useQuery('my-company', () =>
+  const { data, isLoading } = useQuery('my-company', () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/store/get-store`, {
         headers: {
@@ -38,6 +39,10 @@ const Company = () => {
         </h1>
       </>
     )
+  }
+
+  if (isLoading){
+    return (<LoadingAdmin />);
   }
 
   return (

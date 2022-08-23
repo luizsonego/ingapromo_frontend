@@ -28,11 +28,16 @@ function AdminLayout() {
 				
         <SideBar access={data?.access_given} />
         
-        <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6 ml-64">
+        <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+            <div className="w-full h-full">
+  						<Outlet />
+            </div>
+        </div>
+
+        {/* <div className="container mx-auto py-10 md:w-4/5 w-11/12 px-6 ">
         	<div className=" w-full h-full">
-						<Outlet />
 					</div>
-      	</div>
+      	</div> */}
 
 			</div>
     </>

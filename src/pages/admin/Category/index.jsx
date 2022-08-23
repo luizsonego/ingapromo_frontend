@@ -1,7 +1,7 @@
 import axios from "axios";
-import React from "react";
 import { useQuery } from "react-query";
 import Information from "../../../components/Information";
+import LoadingAdmin from "../../../components/LoadingAdmin";
 import NavBarAdmin from "../../../components/NavBarAdmin";
 
 const columns = [
@@ -16,7 +16,7 @@ const columns = [
 ];
 function CategoryAdmin() {
   const { data, isLoading } = useQuery(
-    "categories",
+    "admin-categories",
     () =>
       axios
         .get(`${process.env.REACT_APP_API}/v1/category`, {
@@ -30,14 +30,11 @@ function CategoryAdmin() {
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {}),
-    {
-      staleTime: 3000,
-    }
+        .finally(() => {})
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (<LoadingAdmin />);
   }
 
   return (

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React from 'react';
 import { useQuery } from 'react-query';
 import Information from '../../../components/Information';
+import LoadingAdmin from '../../../components/LoadingAdmin';
 import NavBarAdmin from '../../../components/NavBarAdmin';
 
 const columns = [
@@ -45,7 +45,7 @@ const ManageCompanies = () => {
 	);
 
   if (isLoading) { 
-    return <div>Loading...</div>;
+    return (<LoadingAdmin />);
   }
 	
   return (
