@@ -6,7 +6,7 @@ import { fDate } from '../../helpers/dateConvertEpochToHuman'
 function Card({ data }) {
   console.log(data)
   return (
-    <div className="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:mx-5 mt-3">
+    <div className="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:mx-5 mt-1">
       <div className="md:flex">
         <div className="md:shrink-0 p-3">
           {!data.imageFilePath ? (
