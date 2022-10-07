@@ -13,7 +13,7 @@ const columns = [
   {
     name: 'Codigo do cupom',
     selector: 'coupon',
-    subSelector: 'code',
+    // subSelector: 'code',
   },
   {
     name: 'Codigo de uso',
@@ -22,7 +22,7 @@ const columns = [
   {
     name: 'Usuario',
     selector: 'consumer',
-    subSelector: 'name',
+    // subSelector: 'name',
   },
 ]
 

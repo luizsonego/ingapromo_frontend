@@ -1,35 +1,65 @@
-import axios from "axios"
-import { useQuery } from "react-query"
-import AdsVertical from "../../components/Ads/vertical"
-import Card from "../../components/Card"
-import SkeletonLoading from "../../components/Card/SkeletonLoading"
+import axios from "axios";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import AdsVertical from "../../components/Ads/vertical";
+import Card from "../../components/Card";
+import SkeletonLoading from "../../components/Card/SkeletonLoading";
 
 const AllCoupons = () => {
-  const { data: couponsData, isLoading: couponsLoading } = useQuery('all-coupons-gest', async () =>
-    axios
-      .get(`${process.env.REACT_APP_API}/v1/coupon`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => res.data.data),
-  )
+  const [page, setPage] = useState(1); //"http://localhost:8000/v1/coupon/index?page=1"
+  const [linkPagination, setLinkPagination] = useState([]);
+  const { data, isLoading } = useQuery(
+    ["all-coupons-gest", page],
+    () =>
+      axios
+        .get(`${process.env.REACT_APP_API}/v1/coupon/index/?page=${page}`, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          setLinkPagination([response.data._link, response.data._meta]);
+          return response.data.data;
+        }),
+    {
+      keepPreviousData: true,
+      staleTime: 5000,
+    }
+  );
+
   return (
     <section className="container mx-auto pt-12">
-          <div className="mx-auto flex flex-col lg:flex-row gap-2">
-            <div className="mt-6 lg:mt-0 md:w-full md:w-2/6 rounded-xl">
-              <AdsVertical />
-            </div>
+      <div className="mx-auto flex flex-col lg:flex-row gap-2">
+        <div className="mt-6 lg:mt-0 md:w-full md:w-2/6 rounded-xl">
+          <AdsVertical />
+        </div>
+        <div className="lg:w-auto rounded-xl mx-2 md:mx-auto">
+          {isLoading && <SkeletonLoading />}
+          {data?.map((item) => (
+            <Card data={item} key={item.id} />
+          ))}
+        </div>
 
-            <div className="lg:w-auto rounded-xl mx-2 md:mx-auto">
-              {couponsLoading && (<SkeletonLoading />)}
-              {couponsData?.map((item) => (
-                <Card data={item} key={item.id} />
-              ))}
-            </div>
-          </div>
-        </section>
-  )
-}
+        <div>
+          <button
+            onClick={() => setPage((old) => Math.max(old - 1, 1))}
+            disabled={page === 1}
+          >
+            Página Anterior
+          </button>
+          <span>Página Atual: {page}</span>
+          <button
+            onClick={() =>
+              setPage((old) => (linkPagination[1].pageCount ? old + 1 : old))
+            }
+            // disabled={
+            //   linkPagination[0].last.href
+            // }
+          >
+            Próxima Página
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default AllCoupons
+export default AllCoupons;

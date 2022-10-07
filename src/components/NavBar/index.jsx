@@ -26,7 +26,7 @@ const menuOptions = [
 const NavBar = () => {
   const [show, setShow] = useState(null)
   const [profile, setProfile] = useState(false)
-  const { data, isLoading } = useQuery(['user'], async () =>
+  const { data } = useQuery(['user'], async () =>
     axios
       .get(`${process.env.REACT_APP_API}/v1/user/get-user`, {
         headers: {
@@ -105,7 +105,7 @@ const NavBar = () => {
             menu
             */}
             <div className="flex">
-              <div className="hidden xl:flex md:mr-6 xl:mr-16">
+              <div className="hidden xl:flex">
                 {menuOptions !== null &&
                   menuOptions.map((item, index) => (
                     <Link
@@ -120,7 +120,7 @@ const NavBar = () => {
               {/* 
               Profile
                */}
-              {isLogged && (
+              {isLogged ? (
                 <div className="hidden xl:flex items-center">
                   <div className="relative">
                     <div
@@ -172,6 +172,13 @@ const NavBar = () => {
                     </div>
                   </div>
                 </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="flex px-5 py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+                >
+                  Cadastro/Login
+                </Link>
               )}
             </div>
           </div>
@@ -301,7 +308,7 @@ const NavBar = () => {
                 {/* 
                 profile
                 */}
-                {isLogged && (
+                {isLogged ? (
                   <div className="w-full pt-4">
                     <div className="border-t border-gray-300">
                       <div className="w-full flex items-center justify-between pt-1">
@@ -328,6 +335,18 @@ const NavBar = () => {
                       </div>
                     </div>
                   </div>
+                ) : (
+                  <ul className="f-m-m">
+                  <Link to="/login" className="cursor-pointer">
+                    <li className="text-gray-800 pt-5">
+                      <div className="flex items-center">
+                        <p className="text-indigo-700 xl:text-base text-base ml-3">
+                        Cadastro/Login
+                        </p>
+                      </div>
+                    </li>
+                  </Link>
+                  </ul>
                 )}
               </div>
             </div>

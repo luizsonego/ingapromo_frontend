@@ -1,4 +1,9 @@
+
 import { Link } from "react-router-dom"
+import Facebook from "../Icons/Facebook"
+import Instagram from "../Icons/Instagram"
+import Twitter from "../Icons/Twitter"
+import Website from "../Icons/Website"
 
 const FullProfile = ({data}) => {
   return (
@@ -36,7 +41,9 @@ const FullProfile = ({data}) => {
 
             <div className="flex md:flex-row flex-col gap-4">
               <div className="text-base text-gray-400/80 hover:text-gray-400 text-center md:text-left">
-                {data.website}
+                <Link to={data.website} >
+                  <Website />
+                </Link>                
               </div>
             </div>
 
@@ -61,13 +68,19 @@ const FullProfile = ({data}) => {
 
             <div className="flex md:flex-row flex-col gap-4 mt-3">
               <div className="text-xs text-gray-400/80 hover:text-gray-400">
-                {data.facebook}
+                <Link to={data.facebook} >
+                  <Facebook />
+                </Link>                
               </div>
               <div className="text-xs text-gray-400/80 hover:text-gray-400">
-                {data.instagram}
+                <Link to={data.instagram} >
+                  <Instagram />
+                </Link>
               </div>
               <div className="text-xs text-gray-400/80 hover:text-gray-400">
-                {data.twitter}
+                <Link to={data.twitter}>
+                  <Twitter />
+                </Link>
               </div>
             </div>
           </div>

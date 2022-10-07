@@ -1,10 +1,9 @@
-import { IKImage } from 'imagekitio-react'
-import { Link } from 'react-router-dom'
-import checkIsPercentageOrValue from '../../helpers/checkIsPercentageOrValue'
-import { fDate } from '../../helpers/dateConvertEpochToHuman'
+import { IKImage } from 'imagekitio-react';
+import { Link } from 'react-router-dom';
+import checkIsPercentageOrValue from '../../helpers/checkIsPercentageOrValue';
+import { fDate, fEndDate } from '../../helpers/dateConvertEpochToHuman';
 
 function Card({ data }) {
-  console.log(data)
   return (
     <div className="mx-auto bg-white rounded-xl shadow-md overflow-hidden md:mx-5 mt-1">
       <div className="md:flex">
@@ -43,6 +42,9 @@ function Card({ data }) {
         </div>
 
         <div className="md:shrink-0 px-2 pb-3 md:pb-0 flex flex-col items-center justify-center gap-2">
+          <p>
+            Vence {fEndDate(data?.end_date)}
+          </p>
           <h3 className="text-lg font-bold ">
             Desconto de{' '}
             {checkIsPercentageOrValue(data.discount, data.discount_type)}

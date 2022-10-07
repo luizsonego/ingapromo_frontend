@@ -25,7 +25,18 @@ const Category = () => {
   )
 
   return (
+    <>
+    <div class="bg-fixed h-80 bg-cover bg-bottom" style={{'background-image': `url(${data?.imageUrl})`}}>
+      <div className='flex justify-center items-center bg-bg-blue-500 w-full h-80'>
+        <h1 className="font-sans text-5xl antialiased font-black text-white" style={{'textShadow': '0px 0 6px  BLACK'}}>
+          {data?.name}
+        </h1>
+      </div>
+    </div>
+
     <section className="container mx-auto pt-12 ">
+
+
       <div className="text-center pb-2 md:pb-5 pt-7 md:pt-0">
         <h1 className="font-bold text-xl md:text-2xl lg:text-4xl font-heading text-gray-900">
           {data?.name}
@@ -45,6 +56,7 @@ const Category = () => {
         </div>
       </div>
     </section>
+    </>
   )
 }
 
