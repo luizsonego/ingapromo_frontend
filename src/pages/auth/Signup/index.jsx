@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import Google from '../Social/Google'
+import GgLogin from '../Social/GgLogin'
 
 const Signup = () => {
   let navigate = useNavigate()
@@ -53,7 +53,7 @@ const Signup = () => {
             Cadastre-se
           </p>
           <div className="w-full flex items-center justify-between py-5">
-            <Google />
+            <GgLogin />
           </div>
 
           <form onSubmit={handleSubmitUser}>
