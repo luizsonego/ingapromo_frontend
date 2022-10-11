@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import Google from '../Social/Google'
+import GgLogin from '../Social/GgLogin'
 
 const Login = () => {
   let navigate = useNavigate()
@@ -56,7 +56,7 @@ const Login = () => {
   return (
     <div
       className="h-full bg-primary-lite w-full py-16 px-4"
-      style={{ height: '100vh' }}
+      style={{ height: "100vh" }}
     >
       <div className="flex flex-col items-center justify-center">
         {/* LOGO */}
@@ -69,8 +69,8 @@ const Login = () => {
             Faça login com sua conta
           </p>
 
-          <Google />
-          
+          <GgLogin />
+
           <div className="w-full flex items-center justify-between py-5">
             <hr className="w-full bg-gray-400" />
             <p className="text-base font-medium leading-4 px-2.5 text-gray-400">
@@ -78,7 +78,7 @@ const Login = () => {
             </p>
             <hr className="w-full bg-gray-400  " />
           </div>
-          
+
           <form onSubmit={handleSubmitUser}>
             <div>
               <label className="text-sm font-medium leading-none text-gray-800">
@@ -163,18 +163,19 @@ const Login = () => {
             </div>
           </form>
         </div>
-      
-        <div className='rounded lg:w-1/3  md:w-1/2 w-full p-7 mt-10'>
-          <div className='flex justify-center'>
-            <Link to="/cadastro" className='text-center font-sans text-lg antialiased text-gray-800 py-3 px-12 border border-amber-500 text-gray-700 hover:bg-amber-500 hover:text-gray-100 transition-all duration-300'>
+
+        <div className="rounded lg:w-1/3  md:w-1/2 w-full p-7 mt-10">
+          <div className="flex justify-center">
+            <Link
+              to="/cadastro"
+              className="text-center font-sans text-lg antialiased text-gray-800 py-3 px-12 border border-amber-500 text-gray-700 hover:bg-amber-500 hover:text-gray-100 transition-all duration-300"
+            >
               Cadastre-se
             </Link>
           </div>
         </div>
-
       </div>
-
     </div>
-  )
+  );
 }
 export default Login
