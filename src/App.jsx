@@ -6,8 +6,7 @@ import MainRouter from './routes';
 
 gapi.load("client:auth2", () => {
   gapi.client.init({
-    clientId:
-      "135753063284-p7vc28e4pm9q10ns6t49ncg4g3fdeqfl.apps.googleusercontent.com",
+    clientId: `${process.env.REACT_APP_GOOGLE_APP_ID}`,
     plugin_name: "chat",
   });
 });

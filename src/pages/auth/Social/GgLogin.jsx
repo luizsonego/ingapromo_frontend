@@ -43,7 +43,7 @@ const GgLogin = () => {
 
   return (
     <LoginSocialGoogle
-      client_id={process.env.REACT_APP_GOOGLE_APP_ID || ""}
+      client_id={process.env.REACT_APP_GOOGLE_APP_ID}
       onResolve={handleLoginGoogle}
       onReject={handleSocialLoginFailure}
       scope="openid profile email"
